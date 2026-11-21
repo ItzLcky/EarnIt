@@ -30,6 +30,7 @@ jobs:
       - name: Build
         run: |
           set -o pipefail
+          mkdir -p build
           xcodebuild build \
             -project EarnIt.xcodeproj \
             -scheme EarnIt \
