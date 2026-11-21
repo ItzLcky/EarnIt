@@ -1,0 +1,10 @@
+*.xcodeproj/
+xcuserdata/
+DerivedData/
+.DS_Store
+build/
+signing/
+*.p8
+*.p12
+*.cer
+*.certSigningRequest

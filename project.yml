@@ -1,0 +1,131 @@
+name: EarnIt
+options:
+  bundleIdPrefix: app.earnit
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.10"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    # Set your Apple Developer Team ID here (or in Xcode → Signing & Capabilities).
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    TARGETED_DEVICE_FAMILY: "1"
+
+targets:
+  EarnIt:
+    type: application
+    platform: iOS
+    sources:
+      - path: EarnIt
+        excludes:
+          - "Support/Tips.storekit"
+      - path: EarnIt/Support/Tips.storekit
+        buildPhase: none
+      - path: Shared
+    entitlements:
+      path: EarnIt/EarnIt.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups:
+          - group.app.earnit
+    info:
+      path: EarnIt/Info.plist
+      properties:
+        CFBundleDisplayName: EarnIt
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        NSCameraUsageDescription: EarnIt uses the camera to verify photo challenges and count exercise reps. Everything is processed on your device and never uploaded.
+        NSMotionUsageDescription: EarnIt counts your steps for walking challenges. Step data never leaves your device.
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.earnit
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+    dependencies:
+      - target: ShieldConfiguration
+      - target: ShieldAction
+      - target: ActivityMonitor
+    scheme:
+      storeKitConfiguration: EarnIt/Support/Tips.storekit
+
+  ShieldConfiguration:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: ShieldConfiguration
+      - path: Shared
+    entitlements:
+      path: ShieldConfiguration/ShieldConfiguration.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups:
+          - group.app.earnit
+    info:
+      path: ShieldConfiguration/Info.plist
+      properties:
+        CFBundleDisplayName: EarnIt Shield
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.ManagedSettingsUI.shield-configuration-service
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShieldConfigurationExtension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.earnit.ShieldConfiguration
+
+  ShieldAction:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: ShieldAction
+      - path: Shared
+    entitlements:
+      path: ShieldAction/ShieldAction.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups:
+          - group.app.earnit
+    info:
+      path: ShieldAction/Info.plist
+      properties:
+        CFBundleDisplayName: EarnIt Shield Action
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.ManagedSettings.shield-action-service
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ShieldActionExtension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.earnit.ShieldAction
+
+  ActivityMonitor:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: ActivityMonitor
+      - path: Shared
+    entitlements:
+      path: ActivityMonitor/ActivityMonitor.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+        com.apple.security.application-groups:
+          - group.app.earnit
+    info:
+      path: ActivityMonitor/Info.plist
+      properties:
+        CFBundleDisplayName: EarnIt Monitor
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.deviceactivity.monitor-extension
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).ActivityMonitorExtension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.earnit.ActivityMonitor

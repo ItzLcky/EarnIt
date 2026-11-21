@@ -1,0 +1,77 @@
+{
+  "identifier": "9E1F2C3A",
+  "nonRenewingSubscriptions": [],
+  "products": [
+    {
+      "displayPrice": "0.99",
+      "familyShareable": false,
+      "internalID": "6400000001",
+      "localizations": [
+        {
+          "description": "Buys a coffee for the developer",
+          "displayName": "Small tip",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "app.earnit.tip.small",
+      "referenceName": "Small tip",
+      "type": "Consumable"
+    },
+    {
+      "displayPrice": "2.99",
+      "familyShareable": false,
+      "internalID": "6400000002",
+      "localizations": [
+        {
+          "description": "Keeps the lights on",
+          "displayName": "Medium tip",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "app.earnit.tip.medium",
+      "referenceName": "Medium tip",
+      "type": "Consumable"
+    },
+    {
+      "displayPrice": "4.99",
+      "familyShareable": false,
+      "internalID": "6400000003",
+      "localizations": [
+        {
+          "description": "You're amazing",
+          "displayName": "Large tip",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "app.earnit.tip.large",
+      "referenceName": "Large tip",
+      "type": "Consumable"
+    },
+    {
+      "displayPrice": "9.99",
+      "familyShareable": false,
+      "internalID": "6400000004",
+      "localizations": [
+        {
+          "description": "Legend status",
+          "displayName": "Huge tip",
+          "locale": "en_US"
+        }
+      ],
+      "productID": "app.earnit.tip.huge",
+      "referenceName": "Huge tip",
+      "type": "Consumable"
+    }
+  ],
+  "settings": {
+    "_failTransactionsEnabled": false,
+    "_locale": "en_US",
+    "_storefront": "USA",
+    "_storeKitErrors": []
+  },
+  "subscriptionGroups": [],
+  "version": {
+    "major": 3,
+    "minor": 0
+  }
+}
