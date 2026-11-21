@@ -20,8 +20,12 @@ fi
 
 udid="$(idevice_id -l 2>/dev/null | head -1 || true)"
 if [[ -z "$udid" ]]; then
-  echo "No iPhone detected. Plug it in via USB, unlock it, tap 'Trust', and make sure usbmuxd is running:" >&2
-  echo "  sudo systemctl start usbmuxd   (or: sudo usbmuxd -f)" >&2
+  if ! command -v usbmuxd >/dev/null; then
+    echo "usbmuxd isn't installed (Linux needs it to talk to iPhones):  sudo pacman -S usbmuxd" >&2
+  else
+    echo "No iPhone detected. Plug it in via USB, unlock it, tap 'Trust', then:" >&2
+    echo "  sudo systemctl start usbmuxd && idevicepair pair" >&2
+  fi
   exit 1
 fi
 echo "📱 Found iPhone $udid"

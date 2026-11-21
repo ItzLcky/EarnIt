@@ -38,8 +38,9 @@ git commit -am "Set bundle ID" && git push
 1. Plug the iPhone into your PC, unlock it, and tap **Trust**.
 2. Get its device ID (UDID):
    ```bash
-   sudo systemctl start usbmuxd    # if it isn't already running
-   idevice_id -l
+   sudo pacman -S usbmuxd           # one-time: the service Linux uses to talk to iPhones over USB
+   sudo systemctl start usbmuxd     # usually starts by itself when the iPhone is plugged in
+   idevice_id -l                    # prints a long ID; if empty, re-plug, unlock, tap Trust
    ```
 3. Add it at <https://developer.apple.com/account/resources/devices/add>. Platform is iOS; name it anything and paste the UDID.
 
@@ -101,6 +102,7 @@ From now on, `git push`, wait for the build, then run `scripts/install-on-iphone
 | `No profiles for '…' were found` | Make sure the iPhone is registered (step 3) and the API key has the Admin role |
 | `App Group … not available` | Create the group (step 4) and tick it on all four app IDs |
 | `No signing certificate "Apple Development"` | Re-check step 5; `DEV_CERT_PASSWORD` must match `signing/dev-cert.password` |
-| `idevice_id -l` prints nothing | Run `sudo systemctl start usbmuxd`, re-plug, unlock the phone, tap Trust |
+| `idevice_id -l`: "Unable to retrieve device list" | `usbmuxd` isn't installed or running: `sudo pacman -S usbmuxd && sudo systemctl start usbmuxd` |
+| `idevice_id -l` prints nothing | Re-plug, unlock the phone, tap **Trust**, then run `idevicepair pair` |
 | Install fails with "Developer Mode" | Settings → Privacy & Security → Developer Mode |
 | App installs but blocking does nothing | Finish onboarding; check Settings → Screen Time → Apps with Screen Time Access |
